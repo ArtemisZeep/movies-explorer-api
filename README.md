@@ -28,6 +28,6 @@ POST /signin
 
 
 # Ссылки на проект
-IP-адрес 84.201.137.39
+IP-адрес 84.201.167.122
 
 Backend https://api.artemiszeep.nomoredomainsrocks.ru
