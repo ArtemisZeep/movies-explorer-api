@@ -16,9 +16,9 @@ router.route('/')
         nameEN: Joi.string().required(),
         nameRU: Joi.string().required(),
         movieId: Joi.string().required(),
-        thumbnail: Joi.string().required(),
-        trailerLink: Joi.string().required(),
-        image: Joi.string().required(),
+        thumbnail: Joi.string().required().pattern(/^(https?:\/\/)(www\.)?[\w-]+(\.[a-z])+[\w~!@#$%&*()-+=:;\\'",.?/]+#?/i),
+        trailerLink: Joi.string().required().pattern(/^(https?:\/\/)(www\.)?[\w-]+(\.[a-z])+[\w~!@#$%&*()-+=:;\\'",.?/]+#?/i),
+        image: Joi.string().required().pattern(/^(https?:\/\/)(www\.)?[\w-]+(\.[a-z])+[\w~!@#$%&*()-+=:;\\'",.?/]+#?/i),
         description: Joi.string().required(),
         year: Joi.string().required(),
         duration: Joi.string().required(),
@@ -34,9 +34,9 @@ router.route('/_id')
     celebrate({
       params: Joi.object().keys({
         movieId: Joi.string()
-          .required()
+          .hex()
           .length(24)
-          .pattern(/[a-z][0-9]+/),
+          .required(),
       }),
     }),
     deleteMovie,
