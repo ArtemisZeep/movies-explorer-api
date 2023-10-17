@@ -8,6 +8,8 @@ const {
   deleteMovie,
 } = require('../controllers/movies');
 
+const url = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/;
+
 router.route('/')
   .get(getMovies)
   .post(
@@ -15,13 +17,13 @@ router.route('/')
       body: Joi.object().keys({
         nameEN: Joi.string().required(),
         nameRU: Joi.string().required(),
-        movieId: Joi.string().required(),
-        thumbnail: Joi.string().required().pattern(/^(https?:\/\/)(www\.)?[\w-]+(\.[a-z])+[\w~!@#$%&*()-+=:;\\'",.?/]+#?/i),
-        trailerLink: Joi.string().required().pattern(/^(https?:\/\/)(www\.)?[\w-]+(\.[a-z])+[\w~!@#$%&*()-+=:;\\'",.?/]+#?/i),
-        image: Joi.string().required().pattern(/^(https?:\/\/)(www\.)?[\w-]+(\.[a-z])+[\w~!@#$%&*()-+=:;\\'",.?/]+#?/i),
+        movieId: Joi.number().required(),
+        thumbnail: Joi.string().required().regex(url),
+        trailerLink: Joi.string().required().regex(url),
+        image: Joi.string().required().regex(url),
         description: Joi.string().required(),
         year: Joi.string().required(),
-        duration: Joi.string().required(),
+        duration: Joi.number().required(),
         director: Joi.string().required(),
         country: Joi.string().required(),
       }),
@@ -29,7 +31,7 @@ router.route('/')
     createMovie,
   );
 
-router.route('/_id')
+router.route('/:movieId')
   .delete(
     celebrate({
       params: Joi.object().keys({

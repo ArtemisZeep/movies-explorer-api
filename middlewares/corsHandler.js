@@ -1,4 +1,6 @@
 const allowedCors = [
+  'https://artemiszeep.nomoredomainsrocks.ru"',
+  'http://artemiszeep.nomoredomainsrocks.ru"',
   'https://localhost:3000',
   'http://localhost:3000',
   'https://localhost:3001',

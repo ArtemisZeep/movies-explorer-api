@@ -16,7 +16,7 @@ const {
 async function getMovies(req, res, next) {
   const currentUser = req.user;
   try {
-    const movies = await Movie.find({ owner: currentUser._id }).populate(['owner', 'likes']);
+    const movies = await Movie.find({ owner: currentUser._id });
     res.send(movies);
   } catch (error) {
     next(error);
@@ -65,7 +65,7 @@ async function createMovie(req, res, next) {
 
 async function deleteMovie(req, res, next) {
   try {
-    const movie = await Movie.findById(req.params.MOVIEId).orFail(() => {
+    const movie = await Movie.findById(req.params.movieId).orFail(() => {
       const error = new Error(MOVIE_NOT_FOUND_MESSAGE);
       error.name = 'ResourceNotFound';
       error.statusCode = RESOURCE_NOT_FOUND;
@@ -73,7 +73,7 @@ async function deleteMovie(req, res, next) {
     });
 
     if (req.user._id === movie.owner._id.toString()) {
-      const deletedMovie = await Movie.findByIdAndRemove(req.params.MOVIEId);
+      const deletedMovie = await Movie.findByIdAndRemove(req.params.movieId);
       res.status(STATUS_OK).send(deletedMovie);
     } else {
       throw new ForbiddenError(MOVIE_NOT_AUTHORIZED_DELETION_MESSAGE);
