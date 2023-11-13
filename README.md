@@ -7,12 +7,19 @@
 
 # Стек:
 Node.js
+
 Git
+
 GitHub
+
 Npm
+
 Node.js
+
 Git
+
 GitHub
+
 Npm
 
 # Реализовано:
