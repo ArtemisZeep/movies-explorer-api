@@ -20,7 +20,17 @@ Git
 
 GitHub
 
-Npm
+Vue.JS
+
+MongoDB
+
+Nginx
+
+Bash
+
+Express.js
+
+PM2
 
 # Реализовано:
 
